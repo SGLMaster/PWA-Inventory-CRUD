@@ -1,13 +1,11 @@
 import { LitElement, html, css } from 'lit-element';
-import { classMap } from 'lit-html/directives/class-map.js';
-import { openWcLogo } from './open-wc-logo.js';
+import { Router } from '@vaadin/router';
 
 import '@material/mwc-tab-bar';
 import '@material/mwc-tab';
 
-import '../../page-main/page-main.js';
+import '../../page-home/page-home.js';
 import '../../page-one/page-one.js';
-import { templateAbout } from './templateAbout.js';
 
 export class SimpleInventoryCrud extends LitElement {
   static get properties() {
@@ -22,47 +20,37 @@ export class SimpleInventoryCrud extends LitElement {
     this.page = 'main';
   }
 
-  _renderPage() {
-    switch (this.page) {
-      case 'main':
-        return html`
-          <page-main .logo=${openWcLogo}></page-main>
-        `;
-      case 'pageOne':
-        return html`
-          <page-one></page-one>
-        `;
-      case 'about':
-        return templateAbout;
-      default:
-        return html`
-          <p>Page not found try going to <a href="#main">Main</a></p>
-        `;
-    }
+  firstUpdated() {
+    const router = new Router(this.shadowRoot.getElementById('outlet'));
+    router.setRoutes([
+      { path: '/', component: 'page-home' },
+      { path: '/pageOne', component: 'page-one' },
+      {
+        path: '(.*)',
+        redirect: '/',
+        action: () => {
+          this.activeTab = 'basic';
+        },
+      },
+    ]);
   }
 
-  __clickPageLink(ev) {
-    ev.preventDefault();
-    this.page = ev.target.hash.substring(1);
-  }
-
-  __addActiveIf(page) {
-    return classMap({ active: this.page === page });
+  switchRoute(route) {
+    this.page = route;
+    Router.go(`/${route}`);
   }
 
   render() {
     return html`
       <header>
         <mwc-tab-bar>
-          <mwc-tab label="Home"></mwc-tab>
-          <mwc-tab label="Inventory"></mwc-tab>
+          <mwc-tab label="Home" @click=${() => this.switchRoute('')}></mwc-tab>
+          <mwc-tab label="Inventory" @click=${() => this.switchRoute('pageOne')}></mwc-tab>
           <mwc-tab label="About"></mwc-tab>
         </mwc-tab-bar>
       </header>
 
-      <main>
-        ${this._renderPage()}
-      </main>
+      <main id="outlet"></main>
 
       <p class="app-footer">
         🚽 Made with love by

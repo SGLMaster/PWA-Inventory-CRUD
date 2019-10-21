@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit-element';
 
-export class PageMain extends LitElement {
+export class PageHome extends LitElement {
   static get styles() {
     return css`
       :host {
