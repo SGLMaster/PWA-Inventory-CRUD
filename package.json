@@ -62,7 +62,10 @@
   "author": "Willians Briceño",
   "license": "MIT",
   "dependencies": {
-    "lit-html": "^1.0.0",
-    "lit-element": "^2.0.1"
+    "@material/mwc-icon-button": "^0.10.0",
+    "@material/mwc-tab": "^0.10.0",
+    "@material/mwc-tab-bar": "^0.10.0",
+    "lit-element": "^2.0.1",
+    "lit-html": "^1.0.0"
   }
 }

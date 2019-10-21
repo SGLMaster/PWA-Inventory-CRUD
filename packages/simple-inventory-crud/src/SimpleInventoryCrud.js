@@ -2,6 +2,9 @@ import { LitElement, html, css } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import { openWcLogo } from './open-wc-logo.js';
 
+import '@material/mwc-tab-bar';
+import '@material/mwc-tab';
+
 import '../../page-main/page-main.js';
 import '../../page-one/page-one.js';
 import { templateAbout } from './templateAbout.js';
@@ -50,23 +53,11 @@ export class SimpleInventoryCrud extends LitElement {
   render() {
     return html`
       <header>
-        <ul>
-          <li>
-            <a href="#main" class=${this.__addActiveIf('main')} @click=${this.__clickPageLink}
-              >Main</a
-            >
-          </li>
-          <li>
-            <a href="#pageOne" class=${this.__addActiveIf('pageOne')} @click=${this.__clickPageLink}
-              >Page One</a
-            >
-          </li>
-          <li>
-            <a href="#about" class=${this.__addActiveIf('about')} @click=${this.__clickPageLink}
-              >About</a
-            >
-          </li>
-        </ul>
+        <mwc-tab-bar>
+          <mwc-tab label="Home"></mwc-tab>
+          <mwc-tab label="Inventory"></mwc-tab>
+          <mwc-tab label="About"></mwc-tab>
+        </mwc-tab-bar>
       </header>
 
       <main>
@@ -93,6 +84,11 @@ export class SimpleInventoryCrud extends LitElement {
           color: #1a2b42;
           max-width: 960px;
           margin: 0 auto;
+        }
+
+        mwc-top-app-bar {
+          --mdc-theme-primary: orange;
+          --mdc-theme-on-primary: black;
         }
 
         header {
