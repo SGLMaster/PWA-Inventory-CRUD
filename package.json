@@ -34,7 +34,7 @@
     "@open-wc/demoing-storybook": "^0.3.0",
     "@open-wc/building-rollup": "^0.9.0",
     "rimraf": "^2.6.3",
-    "rollup": "^1.15.4",
+    "rollup": "^2.79.2",
     "es-dev-server": "^1.5.0"
   },
   "eslintConfig": {
